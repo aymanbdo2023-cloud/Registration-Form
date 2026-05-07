@@ -4,7 +4,7 @@ const Contact = () => {
     const [form, setForm] = useState({ name: '', message: ''});
     const [submitted, setSubmitted] = useState(false);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
@@ -14,13 +14,22 @@ const Contact = () => {
         setSubmitted(true);
     };
 
-    if (submitted) return <h2>Thanks!</h2>;
+    if (submitted) return <div className="page-container"><h2>Thanks!</h2></div>;
     return (
-        <form onSubmit={handleSubmit}>
-            <input name="name" value={form.name} onChange={handleChange} />
-            <input name="message" value={form.message} onChange={handleChange} />
-            <button type="submit">Send</button>
-        </form>
+        <div className="page-container">
+          <h1>Contact</h1>
+          <div className="form-wrapper">
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <input name="name" placeholder="Your Name" value={form.name} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <textarea name="message" placeholder="Your Message" value={form.message} onChange={handleChange} rows={4} />
+                </div>
+                <button className="btn-primary" type="submit">Send</button>
+            </form>
+          </div>
+        </div>
     );
 }
 
