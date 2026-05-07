@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Container, Box, Typography } from '@mui/material';
 
 function RegistrationForm() {
     const [username, setUsername] = useState('');
@@ -60,27 +61,64 @@ function RegistrationForm() {
     };
 
     return (
-        <div className="form-wrapper">
-          <h2>Register</h2>
-          <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                  <input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-              </div>
-              <div className="form-group">
-                  <input placeholder="Email" value={email} onChange={handleEmailChange} />
-                  {errors.email && <span className="error">{errors.email}</span>}
-              </div>
-              <div className="form-group">
-                  <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-                  {errors.password && <span className="error">{errors.password}</span>}
-              </div>
-              <div className="form-group">
-                  <input type="password" placeholder="Confirm Password" value={confirm} onChange={handleConfirmChange} />
-                  {errors.confirm && <span className="error">{errors.confirm}</span>}
-              </div>
-              <button className="btn-primary" type="submit">Register</button>
-          </form>
-        </div>
+        <Container maxWidth="sm">
+            <Box sx={{ mt: 3 }}>
+                <Typography variant="h5" component="h2" gutterBottom>
+                    Register
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        fullWidth
+                        label="Username"
+                        variant="outlined"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        sx={{ mb: 2 }}
+                    />
+                    <TextField
+                        fullWidth
+                        label="Email"
+                        variant="outlined"
+                        type="email"
+                        value={email}
+                        onChange={handleEmailChange}
+                        error={!!errors.email}
+                        helperText={errors.email}
+                        sx={{ mb: 2 }}
+                    />
+                    <TextField
+                        fullWidth
+                        label="Password"
+                        variant="outlined"
+                        type="password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        error={!!errors.password}
+                        helperText={errors.password}
+                        sx={{ mb: 2 }}
+                    />
+                    <TextField
+                        fullWidth
+                        label="Confirm Password"
+                        variant="outlined"
+                        type="password"
+                        value={confirm}
+                        onChange={handleConfirmChange}
+                        error={!!errors.confirm}
+                        helperText={errors.confirm}
+                        sx={{ mb: 2 }}
+                    />
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        type="submit"
+                        size="large"
+                    >
+                        Register
+                    </Button>
+                </form>
+            </Box>
+        </Container>
     );
 }
 

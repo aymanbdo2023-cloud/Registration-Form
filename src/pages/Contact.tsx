@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TextField, Button, Container, Box, Typography } from '@mui/material';
 
 const Contact = () => {
     const [form, setForm] = useState({ name: '', message: ''});
@@ -14,22 +15,52 @@ const Contact = () => {
         setSubmitted(true);
     };
 
-    if (submitted) return <div className="page-container"><h2>Thanks!</h2></div>;
+    if (submitted) return (
+        <Container maxWidth="sm">
+            <Box sx={{ mt: 3, textAlign: 'center' }}>
+                <Typography variant="h4" color="success.main">Thanks!</Typography>
+            </Box>
+        </Container>
+    );
+
     return (
-        <div className="page-container">
-          <h1>Contact</h1>
-          <div className="form-wrapper">
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <input name="name" placeholder="Your Name" value={form.name} onChange={handleChange} />
-                </div>
-                <div className="form-group">
-                    <textarea name="message" placeholder="Your Message" value={form.message} onChange={handleChange} rows={4} />
-                </div>
-                <button className="btn-primary" type="submit">Send</button>
-            </form>
-          </div>
-        </div>
+        <Container maxWidth="sm">
+            <Box sx={{ mt: 3 }}>
+                <Typography variant="h4" component="h1" gutterBottom>
+                    Contact
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        fullWidth
+                        label="Your Name"
+                        name="name"
+                        variant="outlined"
+                        value={form.name}
+                        onChange={handleChange}
+                        sx={{ mb: 2 }}
+                    />
+                    <TextField
+                        fullWidth
+                        label="Your Message"
+                        name="message"
+                        variant="outlined"
+                        multiline
+                        rows={4}
+                        value={form.message}
+                        onChange={handleChange}
+                        sx={{ mb: 2 }}
+                    />
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        type="submit"
+                        size="large"
+                    >
+                        Send
+                    </Button>
+                </form>
+            </Box>
+        </Container>
     );
 }
 
